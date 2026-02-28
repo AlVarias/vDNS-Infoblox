@@ -1,0 +1,15 @@
+---
+- name: Automate DNS Record Creation via Infoblox NIOS
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Add a new A-Record to the Grid
+      infoblox.nios_modules.nios_a_record:
+        name: app-server-01.nz.health.org
+        ipv4addr: 172.16.10.45
+        view: default
+        state: present
+        provider:
+          host: grid-master.local
+          username: admin
+          password: "{{ grid_password }}"
